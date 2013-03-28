@@ -3,5 +3,6 @@ PetDrafter::Application.routes.draw do
 
   devise_scope :user do
     root :to => "home#show"
+    match "new_char" => "home#new"
   end
 end
