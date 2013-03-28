@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  speciesId: 1
+  level: 1
+  health: 1
+  power: 1
+  speed: 1
+  user: 
+
+two:
+  name: MyString
+  speciesId: 1
+  level: 1
+  health: 1
+  power: 1
+  speed: 1
+  user: 
