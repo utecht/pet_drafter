@@ -16,7 +16,7 @@
         </tr>
         <% @pets.each do |p| %>
         <tr>
-            <td><%=p.name%></td>
+            <td><a href="http://www.wowhead.com/npc=<%=p.speciesId%>"><%=p.name%></a></td>
             <td><%=p.level%></td>
         </tr>
         <% end %>

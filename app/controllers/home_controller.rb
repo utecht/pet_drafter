@@ -23,7 +23,7 @@ class HomeController < Devise::SessionsController
           pet.level = p['stats']['level']
           pet.power = p['stats']['power']
           pet.health = p['stats']['health']
-          pet.speciesId = p['stats']['speciesId']
+          pet.speciesId = p['creatureId']
           pet.speed = p['stats']['speed']
           pet.user_id = current_user.id
           pet.save
