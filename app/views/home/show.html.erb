@@ -9,11 +9,18 @@
     </p>
     <%= link_to 'Update Pets', '/update' %>
     <h1>Pets</h1>
-    <ul>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+        </tr>
         <% @pets.each do |p| %>
-            <li><%=p.name%></li>
+        <tr>
+            <td><%=p.name%></td>
+            <td><%=p.level%></td>
+        </tr>
         <% end %>
-    </ul>
+    </table>
 <% else %>
   <%= link_to 'New Character', 'characters/new' %>
 <% end %>
