@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = current_user.teams
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,11 +14,32 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
+    @pets = current_user.pets
+    @team_pets = @team.pets
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }
     end
+  end
+
+  def remove_pet
+      @team = Team.find(params[:id])
+      @pet = Pet.find(params[:pet_id])
+      TeamPet.where(:team_id => @team.id, :pet_id => @pet.id).destroy_all
+      redirect_to @team, notice: 'Pet Removed'
+  end
+
+  def add_pet
+      @team = Team.find(params[:id])
+      @pet = Pet.find(params[:pet_id])
+      if @team.pets.count >= 7
+          redirect_to @team, notice: 'Max team size already reached'
+          return false
+      end
+      @team.pets << @pet
+      @team.save
+      redirect_to @team, notice: 'Pet added'
   end
 
   # GET /teams/new

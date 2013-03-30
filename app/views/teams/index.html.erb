@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>User</th>
+    <th>Num of Pets</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +12,9 @@
 <% @teams.each do |team| %>
   <tr>
     <td><%= team.name %></td>
-    <td><%= team.user %></td>
-    <td><%= link_to 'Show', team %></td>
-    <td><%= link_to 'Edit', edit_team_path(team) %></td>
+    <td><%= team.pets.count %></td>
+    <td><%= link_to 'Add Pets', team %></td>
+    <td><%= link_to 'Edit Name', edit_team_path(team) %></td>
     <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
@@ -23,3 +23,4 @@
 <br />
 
 <%= link_to 'New Team', new_team_path %>
+<%= link_to 'Back', '/' %>

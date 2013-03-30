@@ -1,14 +1,37 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @team.name %>
 </p>
 
-<p>
-  <b>User:</b>
-  <%= @team.user %>
-</p>
+<h1>Pets on Team</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Level</th>
+    </tr>
+    <% @team_pets.each do |p| %>
+    <tr>
+        <td><a href="http://www.wowhead.com/npc=<%=p.speciesId%>"><%=p.name%></a></td>
+        <td><%=p.level%></td>
+        <td><%= button_to "Remove", :action => "remove_pet", :pet_id => p.id, :id => @team.id %></td>
+    </tr>
+    <% end %>
+</table>
+
+<h1>Add more pets</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Level</th>
+    </tr>
+    <% @pets.each do |p| %>
+    <tr>
+        <td><a href="http://www.wowhead.com/npc=<%=p.speciesId%>"><%=p.name%></a></td>
+        <td><%=p.level%></td>
+        <td><%= button_to "Add", :action => "add_pet", :pet_id => p.id, :id => @team.id %></td>
+    </tr>
+    <% end %>
+</table>
 
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
