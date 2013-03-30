@@ -1,7 +1,22 @@
 <% if user_signed_in? %>
   <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
   <p>Hello World</p>
-  <%= link_to 'New Character', 'new_char' %>
+  <% if @character %>
+    <p>
+      <%= @character.name %>
+      <%= @character.server %>
+      <%= @character.region %>
+    </p>
+    <%= link_to 'Update Pets', '/update' %>
+    <h1>Pets</h1>
+    <ul>
+        <% @pets.each do |p| %>
+            <li><%=p.name%></li>
+        <% end %>
+    </ul>
+<% else %>
+  <%= link_to 'New Character', 'characters/new' %>
+<% end %>
 <% else %>
   <li><%= link_to('Login', new_user_session_path) %></li>
 <% end %>

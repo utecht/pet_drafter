@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @character.name %>
+</p>
+
+<p>
+  <b>Server:</b>
+  <%= @character.server %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @character.region %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @character.user %>
+</p>
+
+<%= link_to 'Edit', edit_character_path(@character) %> |
+<%= link_to 'Back', characters_path %>
