@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328200705) do
+ActiveRecord::Schema.define(:version => 20130330200812) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,25 @@ ActiveRecord::Schema.define(:version => 20130328200705) do
   end
 
   add_index "pets", ["user_id"], :name => "index_pets_on_user_id"
+
+  create_table "team_pets", :force => true do |t|
+    t.integer  "pet_id"
+    t.integer  "team_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "team_pets", ["pet_id"], :name => "index_team_pets_on_pet_id"
+  add_index "team_pets", ["team_id"], :name => "index_team_pets_on_team_id"
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "teams", ["user_id"], :name => "index_teams_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
