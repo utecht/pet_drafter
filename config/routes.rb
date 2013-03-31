@@ -1,14 +1,11 @@
 PetDrafter::Application.routes.draw do
-  resources :lobbies
-
-  resources :teams
-
   devise_for :users
 
   devise_scope :user do
     root :to => "home#show"
     match '/update' => 'home#update'
     match ':controller/:action/:id/:pet_id'
-    resources :characters, :teams
+    match '/lobbies/challenge/:id/:opponentId/:teamId'
+    resources :characters, :teams, :lobbies
   end
 end

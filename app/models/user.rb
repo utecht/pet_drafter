@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
   has_many :pets
   has_many :teams
   has_one :character
+  has_one :lobby
 end

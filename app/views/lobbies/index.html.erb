@@ -16,7 +16,7 @@
 
 <% @lobbies.each do |lobby| %>
   <tr>
-    <td><%= lobby.user %></td>
+    <td><%= lobby.user.email %></td>
     <td><%= lobby.time %></td>
     <td><%= lobby.team %></td>
     <td><%= lobby.opponent %></td>
