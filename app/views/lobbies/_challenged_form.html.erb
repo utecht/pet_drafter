@@ -1,0 +1,5 @@
+<%= form_tag(:controller => "lobbies", :action => 'accept', :method => 'post') do %>
+    <%= collection_select(:team, :id, current_user.teams, :id, :name) %>
+    <%= submit_tag("Accept") %>
+    <%= hidden_field_tag(:id, c.id) %>
+<% end %>

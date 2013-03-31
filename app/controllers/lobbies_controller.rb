@@ -33,8 +33,15 @@ class LobbiesController < ApplicationController
 
   def accept
       lobby = Lobby.find(params[:id])
+      if params[:commit] == 'Reject'
+          lobby.opponent = nil
+          lobby.team = nil
+          lobby.challengetime = nil
+          lobby.save
+          redirect_to '/lobbies', :notice => 'Game rejected'
+          return false
+      end
       lobby.acceptd = true
-      lobby.save
       @game = Game.new
       @game.user = lobby.user
       @game.team = lobby.team
@@ -42,6 +49,8 @@ class LobbiesController < ApplicationController
       @game.opponent_team = Team.find(params[:teamId])
       @game.stage = 0
       @game.save
+      lobby.game = game
+      lobby.save
       redirect_to @game
   end
 end

@@ -1,37 +1,15 @@
-<h1>Listing lobbies</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Time</th>
-    <th>Team</th>
-    <th>Opponent</th>
-    <th>Accepted</th>
-    <th>Challengetime</th>
-    <th>Game</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @lobbies.each do |lobby| %>
-  <tr>
-    <td><%= lobby.user.email %></td>
-    <td><%= lobby.time %></td>
-    <td><%= lobby.team %></td>
-    <td><%= lobby.opponent %></td>
-    <td><%= lobby.accepted %></td>
-    <td><%= lobby.challengetime %></td>
-    <td><%= lobby.game %></td>
-    <td><%= link_to 'Show', lobby %></td>
-    <td><%= link_to 'Edit', edit_lobby_path(lobby) %></td>
-    <td><%= link_to 'Destroy', lobby, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<% if @challenges.count > 0 %>
+    <h1>Incoming Challenges</h1>
+    <% @challenges.each do |c| %>
+        <%= form_tag(:controller => "lobbies", :action => 'accept', :method => 'post') do %>
+            <%= label_tag("Challenge from #{c.user.email}")%>
+            <%= label_tag("Team:") %>
+            <%= collection_select(:team, :id, current_user.teams, :id, :name) %>
+            <%= submit_tag("Accept") %>
+            <%= submit_tag("Reject") %>
+            <%= hidden_field_tag(:id, c.id) %>
+        <% end %>
+    <% end %>
 <% end %>
-</table>
-
+<h1>Challenge another</h1>
 <%= render 'lobby_form' %>
-
-<br />
-
-<%= link_to 'New Lobby', new_lobby_path %>

@@ -50,13 +50,15 @@ class CharactersController < ApplicationController
     # Test to see if character exists on battlenet
     c = HTTParty.get("http://#{@character.region}.battle.net/api/wow/character/#{@character.server}/#{@character.name}")
     if c['reason'] != nil
-        redirect_to action: "new", notice: c['reason']
+        flash[:notice] = c['reason']
+        redirect_to action: "new"
         return false
     end
 
     respond_to do |format|
       if @character.save
-        format.html { redirect_to '/', notice: 'Character was successfully created.' }
+        flash[:notice] = 'Character was successfully created.'
+        format.html { redirect_to '/' }
         format.json { render json: @character, status: :created, location: @character }
       else
         format.html { render action: "new" }
