@@ -24,10 +24,24 @@ class LobbiesController < ApplicationController
 
   def challenge
       lobby = Lobby.find(params[:id])
-      lobby.opponent = params[:opponentId]
-      lobby.team = params[:teamId]
+      lobby.opponent = User.find(params[:opponentId])
+      lobby.team = Team.find(params[:team]['id'])
       lobby.challengetime = Time.now
       lobby.save
       redirect_to "/lobbies", :notice => "#{lobby.opponent.email} Challenged"
+  end
+
+  def accept
+      lobby = Lobby.find(params[:id])
+      lobby.acceptd = true
+      lobby.save
+      @game = Game.new
+      @game.user = lobby.user
+      @game.team = lobby.team
+      @game.opponent = lobby.opponent
+      @game.opponent_team = Team.find(params[:teamId])
+      @game.stage = 0
+      @game.save
+      redirect_to @game
   end
 end

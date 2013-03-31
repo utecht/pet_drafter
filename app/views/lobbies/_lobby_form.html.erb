@@ -1,0 +1,9 @@
+<%= form_tag(:controller => "lobbies", :action => 'challenge', :method => 'post') do %>
+    <% @lobbies.each do |l| %>
+        <%= radio_button_tag(:opponentId, l.user.id) %>
+        <%= label_tag(l.user.email) %>
+    <% end %>
+    <%= collection_select(:team, :id, current_user.teams, :id, :name) %>
+    <%= submit_tag("Challenge") %>
+    <%= hidden_field_tag(:id, current_user.lobby.id) %>
+<% end %>
