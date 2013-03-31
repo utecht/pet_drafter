@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  opponent: 
+  team: 
+  opponent_team: 
+  stage: 1
+
+two:
+  user: 
+  opponent: 
+  team: 
+  opponent_team: 
+  stage: 1

@@ -1,4 +1,6 @@
 PetDrafter::Application.routes.draw do
+  resources :lobbies
+
   resources :teams
 
   devise_for :users

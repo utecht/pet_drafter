@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330200812) do
+ActiveRecord::Schema.define(:version => 20130331182931) do
 
   create_table "characters", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,49 @@ ActiveRecord::Schema.define(:version => 20130330200812) do
   end
 
   add_index "characters", ["user_id"], :name => "index_characters_on_user_id"
+
+  create_table "game_pets", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "pet_id"
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "game_pets", ["game_id"], :name => "index_game_pets_on_game_id"
+  add_index "game_pets", ["pet_id"], :name => "index_game_pets_on_pet_id"
+
+  create_table "games", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "opponent_id"
+    t.integer  "team_id"
+    t.integer  "opponent_team_id"
+    t.integer  "stage"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "games", ["opponent_id"], :name => "index_games_on_opponent_id"
+  add_index "games", ["opponent_team_id"], :name => "index_games_on_opponent_team_id"
+  add_index "games", ["team_id"], :name => "index_games_on_team_id"
+  add_index "games", ["user_id"], :name => "index_games_on_user_id"
+
+  create_table "lobbies", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "time"
+    t.integer  "team_id"
+    t.integer  "opponent_id"
+    t.boolean  "accepted"
+    t.datetime "challengetime"
+    t.integer  "game_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "lobbies", ["game_id"], :name => "index_lobbies_on_game_id"
+  add_index "lobbies", ["opponent_id"], :name => "index_lobbies_on_opponent_id"
+  add_index "lobbies", ["team_id"], :name => "index_lobbies_on_team_id"
+  add_index "lobbies", ["user_id"], :name => "index_lobbies_on_user_id"
 
   create_table "pets", :force => true do |t|
     t.string   "name"

@@ -1,0 +1,35 @@
+<h1>Listing lobbies</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Time</th>
+    <th>Team</th>
+    <th>Opponent</th>
+    <th>Accepted</th>
+    <th>Challengetime</th>
+    <th>Game</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lobbies.each do |lobby| %>
+  <tr>
+    <td><%= lobby.user %></td>
+    <td><%= lobby.time %></td>
+    <td><%= lobby.team %></td>
+    <td><%= lobby.opponent %></td>
+    <td><%= lobby.accepted %></td>
+    <td><%= lobby.challengetime %></td>
+    <td><%= lobby.game %></td>
+    <td><%= link_to 'Show', lobby %></td>
+    <td><%= link_to 'Edit', edit_lobby_path(lobby) %></td>
+    <td><%= link_to 'Destroy', lobby, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lobby', new_lobby_path %>

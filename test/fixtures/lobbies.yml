@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  time: 2013-03-31 13:28:52
+  team: 
+  opponent: 
+  accepted: false
+  challengetime: 2013-03-31 13:28:52
+  game: 
+
+two:
+  user: 
+  time: 2013-03-31 13:28:52
+  team: 
+  opponent: 
+  accepted: false
+  challengetime: 2013-03-31 13:28:52
+  game: 
