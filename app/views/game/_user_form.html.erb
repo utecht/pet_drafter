@@ -1,0 +1,5 @@
+<% if [0, 5, 8].include? stage %>
+<td><%= button_to "Ban", :action => "ban_pet", :pet_id => p.id %></td>
+<% elsif [2, 7, 10].include? stage %>
+<td><%= button_to "Pick", :action => "pick_pet", :pet_id => p.id %></td>
+<% end %>

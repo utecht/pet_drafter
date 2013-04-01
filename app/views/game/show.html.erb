@@ -9,6 +9,7 @@
             <tr>
                 <td><%= p.pet.name %></td>
                 <td><%= p.status %></td>
+                <% render 'user_form', :p => p.pet, :stage => @game.stage %>
             </tr>
         <% end %>
     </table>
@@ -25,6 +26,7 @@
             <tr>
                 <td><%= p.pet.name %></td>
                 <td><%= p.status %></td>
+                <% render 'opponent_form', :p => p.pet, :stage => @game.stage %>
             </tr>
         <% end %>
     </table>

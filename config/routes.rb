@@ -8,6 +8,7 @@ PetDrafter::Application.routes.draw do
     match '/lobbies/challenge/'
     match '/lobbies/accept/'
     match '/games/:id' => 'game#show'
+    match '/games/:id/:action/:pet_id'
     resources :characters, :teams, :lobbies
   end
 end
