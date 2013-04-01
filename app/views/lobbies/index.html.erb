@@ -11,5 +11,23 @@
         <% end %>
     <% end %>
 <% end %>
-<h1>Challenge another</h1>
-<%= render 'lobby_form' %>
+<% if @pending_games.count > 0 %>
+    <h1>Pending Challenges</h1>
+    <% @pending_games.each do |c| %>
+        <%= form_tag(:controller => "lobbies", :action => 'accept', :method => 'post') do %>
+            <%= label_tag("Challenging #{c.opponent.email}")%>
+            <%= label_tag("Team: #{c.team.name}") %>
+            <%= submit_tag("Cancel") %>
+            <%= hidden_field_tag(:id, c.id) %>
+        <% end %>
+    <% end %>
+<% elsif @accepted_games.count > 0 %>
+    <% @accepted_games.each do |g| %>
+        <h1><%= link_to("Join Active Game \##{g.game.id}", "/games/#{g.game.id}")%></h1>
+    <% end %>
+<% elsif @lobbies.count > 0 %>
+    <h1>Challenge another</h1>
+    <%= render 'lobby_form' %>
+<% else %>
+    <h1>No users online, invite some friends</h1>
+<% end %>

@@ -14,9 +14,12 @@ class TeamsController < ApplicationController
   # GET /teams/1.json
   def show
     @team = Team.find(params[:id])
-    @pets = current_user.pets
     @team_pets = @team.pets
-
+    if @team_pets.length > 0
+        @pets = current_user.pets.where('id not in (?)', @team_pets)
+    else
+        @pets = current_user.pets
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @team }

@@ -1,8 +1,8 @@
 class HomeController < Devise::SessionsController
-  def show
+  def index
     if user_signed_in?
       @character = current_user.character
-      @pets = current_user.pets
+      @pet_count = current_user.pets.count
     end
   end 
 

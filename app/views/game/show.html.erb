@@ -1,0 +1,31 @@
+<div>
+    <h1><%= @game.user.email %>'s Pets</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+        <% @user_pets.each do |p| %>
+            <tr>
+                <td><%= p.pet.name %></td>
+                <td><%= p.status %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>
+
+<div>
+    <h1><%= @game.opponent.email %>'s Pets</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+        <% @opponent_pets.each do |p| %>
+            <tr>
+                <td><%= p.pet.name %></td>
+                <td><%= p.status %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>

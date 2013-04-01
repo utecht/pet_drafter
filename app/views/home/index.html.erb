@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <% if @character %>
+    <p><%= @character.name %> (<%= @character.server %>-<%= @character.region %>)</p>
+    <p>Pets: <%= @pet_count %></p>
+    <%= link_to 'Edit Teams', teams_path %>
+    <%= link_to 'Update Pets', '/update' %>
+    <h1><%= link_to 'Find a game', :lobbies %></h1>
+
+    <% else %>
+      <%= link_to 'New Character', 'characters/new' %>
+    <% end %>
+<% else %>
+  <%= link_to('Login or Register', new_user_session_path) %>
+<% end %>

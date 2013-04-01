@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :pets
   has_many :teams
+  has_many :game_pets
   has_one :character
   has_one :lobby
 end
