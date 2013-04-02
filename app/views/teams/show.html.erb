@@ -13,7 +13,7 @@
     <tr>
         <td><a href="http://www.wowhead.com/npc=<%=p.speciesId%>"><%=p.name%></a></td>
         <td><%=p.level%></td>
-        <td><%= button_to "Remove", :action => "remove_pet", :pet_id => p.id, :id => @team.id %></td>
+        <td><%= button_to "Remove", :controller => :teams, :action => "remove_pet", :pet_id => p.id, :id => @team.id %></td>
     </tr>
     <% end %>
 </table>
@@ -29,7 +29,7 @@
     <tr>
         <td><a href="http://www.wowhead.com/npc=<%=p.speciesId%>"><%=p.name%></a></td>
         <td><%=p.level%></td>
-        <td><%= button_to "Add", :action => "add_pet", :pet_id => p.id, :id => @team.id %></td>
+        <td><%= button_to "Add", :controller => :teams, :action => "add_pet", :pet_id => p.id, :id => @team.id %></td>
     </tr>
     <% end %>
 </table>
