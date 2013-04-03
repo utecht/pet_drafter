@@ -11,6 +11,7 @@ PetDrafter::Application.routes.draw do
     match '/games/:id/ban_pet/:pet_id' => 'game#ban_pet'
     match '/games/:id/pick_pet/:pet_id' => 'game#pick_pet'
     match '/games/:id/destroy' => 'game#destroy'
+    match '/games/:id/reset' => 'game#reset'
     resources :characters, :teams, :lobbies
   end
 end

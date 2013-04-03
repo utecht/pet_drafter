@@ -14,6 +14,7 @@ class GameController < ApplicationController
   # 11 - opponent pick
     def show
         @game = Game.find(params[:id])
+        @user = current_user
         @user_pets = @game.game_pets.joins(:pet).where('pets.user_id = ?', @game.user.id)
         @opponent_pets = @game.game_pets.joins(:pet).where('pets.user_id = ?',@game.opponent.id)
         @waiting = {0 => "#{@game.user.email} ban",
@@ -54,13 +55,24 @@ class GameController < ApplicationController
 
     def destroy
       @game = Game.find(params[:id])
-      lobby = Lobby.where(:user => @game.user).first
-      pets = GamePet.where('game_id = ?', @game.id).destroy_all
+      lobby = current_user.lobby
+      @game.game_pets.destroy_all
       @game.destroy
       lobby.opponent = nil
       lobby.team = nil
       lobby.challengetime = nil
       lobby.save
       redirect_to '/lobbies', :notice => 'Game Ended'
+    end
+
+    def reset
+      @game = Game.find(params[:id])
+      @game.game_pets.each do |p|
+        p.status = 0
+        p.save
+      end
+      @game.stage = 0
+      @game.save
+      redirect_to @game
     end
 end

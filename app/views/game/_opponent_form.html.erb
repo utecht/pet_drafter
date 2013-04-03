@@ -1,5 +1,5 @@
-<% if [1, 4, 9].include? stage %>
-  <td><%= button_to "Ban", :controller => :game, :action => "ban_pet", :pet_id => p.id %></td>
-<% elsif [3, 6, 11].include? stage %>
-  <td><%= button_to "Pick", :controller => :game, :action => "pick_pet", :pet_id => p.id %></td>
+<% if [1, 4, 9].include? game.stage and user == game.opponent and p.status == 0 %>
+  <td><%= button_to "Ban", :controller => :game, :action => "ban_pet", :pet_id => p.pet.id %></td>
+<% elsif [2, 7, 10].include? game.stage and user == game.user and p.status == 0 %>
+  <td><%= button_to "Pick", :controller => :game, :action => "pick_pet", :pet_id => p.pet.id %></td>
 <% end %>

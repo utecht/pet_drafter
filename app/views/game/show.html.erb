@@ -15,7 +15,7 @@
             <tr <%= render 'pick_style', :status => p.status %>>
                 <td><a href="http://www.wowhead.com/npc=<%=p.pet.speciesId%>"><%=p.pet.name%></a></td>
                 <% if p.status == 0 %>
-                  <%= render 'opponent_form', :p => p.pet, :stage => @game.stage %>
+                  <%= render 'opponent_form', :p => p, :game => @game, :user => @user %>
                 <% end %>
             </tr>
         <% end %>
@@ -33,10 +33,12 @@
             <tr <%= render 'pick_style', :status => p.status %>>
                 <td><a href="http://www.wowhead.com/npc=<%=p.pet.speciesId%>"><%=p.pet.name%></a></td>
                 <% if p.status == 0 %>
-                  <%= render 'user_form', :p => p.pet, :stage => @game.stage %>
+                  <%= render 'user_form', :p => p, :game => @game, :user => @user %>
                 <% end %>
             </tr>
         <% end %>
     </table>
 </div>
+<br/>
 <%= link_to 'End Game', :controller => 'game', :action => 'destroy' %>
+<%= link_to 'Reset Game', :controller => 'game', :action => 'reset' %>
