@@ -2,4 +2,6 @@
   <td><%= button_to "Ban", :controller => :games, :action => "ban_pet", :pet_id => p.id %></td>
 <% elsif [3, 6, 11].include? stage %>
   <td><%= button_to "Pick", :controller => :games, :action => "pick_pet", :pet_id => p.id %></td>
+<% else %>
+  <td>opponent nothing</td>
 <% end %>
