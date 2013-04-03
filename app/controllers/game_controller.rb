@@ -31,10 +31,20 @@ class GameController < ApplicationController
     end
 
     def ban_pet
-
+      @game = Game.find(params[:id])
+      @pet = Pet.find(params[:petId])
+      game_pet = GamePet.where(:game => @game, :pet => @pet).first
+      game_pet.status = -1
+      game_pet.save
+      redirect_to @game
     end
 
     def pick_pet
-
+      @game = Game.find(params[:id])
+      @pet = Pet.find(params[:petId])
+      game_pet = GamePet.where(:game => @game, :pet => @pet).first
+      game_pet.status = 1
+      game_pet.save
+      redirect_to @game
     end
 end
