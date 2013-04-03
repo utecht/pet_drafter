@@ -32,19 +32,35 @@ class GameController < ApplicationController
 
     def ban_pet
       @game = Game.find(params[:id])
-      @pet = Pet.find(params[:petId])
-      game_pet = GamePet.where(:game => @game, :pet => @pet).first
+      @pet = Pet.find(params[:pet_id])
+      game_pet = GamePet.where('game_id = ?', @game.id).where('pet_id = ?', @pet.id).first
       game_pet.status = -1
       game_pet.save
+      @game.stage = @game.stage + 1
+      @game.save
       redirect_to @game
     end
 
     def pick_pet
       @game = Game.find(params[:id])
-      @pet = Pet.find(params[:petId])
-      game_pet = GamePet.where(:game => @game, :pet => @pet).first
+      @pet = Pet.find(params[:pet_id])
+      game_pet = GamePet.where('game_id = ?', @game.id).where('pet_id = ?', @pet.id).first
       game_pet.status = 1
       game_pet.save
+      @game.stage = @game.stage + 1
+      @game.save
       redirect_to @game
+    end
+
+    def destroy
+      @game = Game.find(params[:id])
+      lobby = Lobby.where(:user => @game.user).first
+      pets = GamePet.where('game_id = ?', @game.id).destroy_all
+      @game.destroy
+      lobby.opponent = nil
+      lobby.team = nil
+      lobby.challengetime = nil
+      lobby.save
+      redirect_to '/lobbies', :notice => 'Game Ended'
     end
 end

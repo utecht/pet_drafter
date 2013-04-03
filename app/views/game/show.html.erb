@@ -1,34 +1,42 @@
 <h1><%= @waiting[@game.stage] %></h1>
-<div>
-    <h1><%= @game.user.email %>'s Pets</h1>
+<br/>
+<div style="
+    float: left;
+    margin-right: 5%;
+    margin-left: 25%;
+">
+    <h2><%= @game.user.email %>'s Pets</h2>
     <table>
         <tr>
             <th>Name</th>
-            <th>Status</th>
+            <th>Action</th>
         </tr>
         <% @user_pets.each do |p| %>
-            <tr>
-                <td><%= p.pet.name %></td>
-                <td><%= p.status %></td>
-                <% render 'user_form', :p => p.pet, :stage => @game.stage %>
+            <tr <%= render 'pick_style', :status => p.status %>>
+                <td><a href="http://www.wowhead.com/npc=<%=p.pet.speciesId%>"><%=p.pet.name%></a></td>
+                <% if p.status == 0 %>
+                  <%= render 'opponent_form', :p => p.pet, :stage => @game.stage %>
+                <% end %>
             </tr>
         <% end %>
     </table>
 </div>
 
 <div>
-    <h1><%= @game.opponent.email %>'s Pets</h1>
+    <h2><%= @game.opponent.email %>'s Pets</h2>
     <table>
         <tr>
             <th>Name</th>
-            <th>Status</th>
+            <th>Action</th>
         </tr>
         <% @opponent_pets.each do |p| %>
-            <tr>
-                <td><%= p.pet.name %></td>
-                <td><%= p.status %></td>
-                <% render 'opponent_form', :p => p.pet, :stage => @game.stage %>
+            <tr <%= render 'pick_style', :status => p.status %>>
+                <td><a href="http://www.wowhead.com/npc=<%=p.pet.speciesId%>"><%=p.pet.name%></a></td>
+                <% if p.status == 0 %>
+                  <%= render 'user_form', :p => p.pet, :stage => @game.stage %>
+                <% end %>
             </tr>
         <% end %>
     </table>
 </div>
+<%= link_to 'End Game', :controller => 'game', :action => 'destroy' %>
