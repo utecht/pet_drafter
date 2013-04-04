@@ -1,3 +1,9 @@
+<% if @accepted_games.count > 0 %>
+    <% @accepted_games.each do |g| %>
+        <h1><%= link_to("Join Active Game \##{g.game.id}", "/games/#{g.game.id}")%></h1>
+    <% end %>
+<% end %>
+
 <% if @challenges.count > 0 %>
     <h1>Incoming Challenges</h1>
     <% @challenges.each do |c| %>
@@ -11,6 +17,7 @@
         <% end %>
     <% end %>
 <% end %>
+
 <% if @pending_games.count > 0 %>
     <h1>Pending Challenges</h1>
     <% @pending_games.each do |c| %>
@@ -21,13 +28,11 @@
             <%= hidden_field_tag(:id, c.id) %>
         <% end %>
     <% end %>
-<% elsif @accepted_games.count > 0 %>
-    <% @accepted_games.each do |g| %>
-        <h1><%= link_to("Join Active Game \##{g.game.id}", "/games/#{g.game.id}")%></h1>
-    <% end %>
-<% elsif @lobbies.count > 0 %>
+<% end %>
+
+<% if @lobbies.count > 0 and @pending_games.count == 0 %>
     <h1>Challenge another</h1>
     <%= render 'lobby_form' %>
-<% else %>
+<% elsif @challenges.count > 0 or @accepted_games.count > 0 %>
     <h1>No users online, invite some friends</h1>
 <% end %>
